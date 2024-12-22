@@ -4,13 +4,18 @@ import { useState } from "react";
 interface IProps {
   handleClose: () => void;
   handleChangeName: (newName: string) => void;
+  customText?: string;
 }
 
-export const GreetingModal = ({ handleClose, handleChangeName }: IProps) => {
-  const [newName, setNewName] = useState<string>("");
+export const InputModal = ({
+  handleClose,
+  handleChangeName,
+  customText,
+}: IProps) => {
+  const [input, setNewInput] = useState<string>("");
 
   const handleOk = () => {
-    handleChangeName(newName);
+    handleChangeName(input);
   };
 
   return (
@@ -34,19 +39,19 @@ export const GreetingModal = ({ handleClose, handleChangeName }: IProps) => {
         }}
       >
         <Typography id="modal-modal-title" variant="h6" component="h2">
-          Change your name:
+          {customText ? customText : "Change your input:"}
         </Typography>
         <TextField
-          value={newName}
+          value={input}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-            setNewName(event.target.value);
+            setNewInput(event.target.value);
           }}
         />
         <Box sx={{ display: "flex", justifyContent: "space-between", mt: 2 }}>
           <Button onClick={handleClose} variant="outlined" color="secondary">
             Cancel
           </Button>
-          <Button onClick={handleOk}>Change name</Button>
+          <Button onClick={handleOk}>Change value</Button>
         </Box>
       </Box>
     </Modal>

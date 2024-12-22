@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@mui/material";
 import { useState } from "react";
-import { GreetingModal } from "./greeting-modal";
+import { InputModal } from "../input-modal/input-modal";
 
 interface IProps {
   defaultName: string;
@@ -36,9 +36,10 @@ export const Greeting = ({ defaultName }: IProps) => {
         Change name
       </Button>
       {open && (
-        <GreetingModal
+        <InputModal
           handleClose={handleClose}
           handleChangeName={handleChangeName}
+          customText="Change your name:"
         />
       )}
     </div>

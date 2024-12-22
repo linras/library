@@ -1,8 +1,10 @@
+import BookDetails from "@/app/components/books/book-details/book-details";
+
 interface Params {
   params: Promise<{ id: number }>;
 }
 
 export default async function BookDetailsPage({ params }: Params) {
   const { id } = await params;
-  return <div>Book Details Page Book id: {id}</div>;
+  return <BookDetails id={id} />;
 }

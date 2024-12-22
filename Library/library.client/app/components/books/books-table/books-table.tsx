@@ -8,8 +8,10 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Tab,
 } from "@mui/material";
 import axios from "axios";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const BooksTable = () => {
@@ -37,6 +39,7 @@ const BooksTable = () => {
                 <TableCell>Title</TableCell>
                 <TableCell>Author</TableCell>
                 <TableCell>Category</TableCell>
+                <TableCell>Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -56,6 +59,9 @@ const BooksTable = () => {
                   </TableCell>
                   <TableCell component="th" scope="row">
                     {BookCategory[book.category]}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <Link href={`/books/${book.id}`}>View</Link>
                   </TableCell>
                 </TableRow>
               ))}

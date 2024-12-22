@@ -1,5 +1,5 @@
 interface Params {
-  params: { id: number };
+  params: Promise<{ id: number }>;
 }
 
 export default async function BookDetailsPage({ params }: Params) {

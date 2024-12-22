@@ -12,6 +12,7 @@ interface IProps {
 const BookDetails = ({ id }: IProps) => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [editingBook, setEditingBook] = useState<boolean>(false);
 
   useEffect(() => {
     setLoading(true);
@@ -37,9 +38,17 @@ const BookDetails = ({ id }: IProps) => {
     }
   };
 
+  //   const handleEdit = () => {
+  //     setEditingBook(false);
+  //   };
+  const onCancelEditing = () => {
+    setEditingBook(false);
+  };
+
   return book ? (
     <>
       <Button onClick={handleDelete}>Delete this book</Button>
+      <Button onClick={() => setEditingBook(true)}>Edit this book</Button>
       <Card>
         <CardContent>
           Book Details Page Book id:{" "}
@@ -47,7 +56,7 @@ const BookDetails = ({ id }: IProps) => {
           Custom env: {process.env.TEST_ENV_VAR}
         </CardContent>
       </Card>
-      <EditBook book={book} />
+      {editingBook && <EditBook book={book} onCancel={onCancelEditing} />}
     </>
   ) : loading ? (
     <CircularProgress />

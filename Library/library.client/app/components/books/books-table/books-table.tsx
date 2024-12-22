@@ -1,5 +1,14 @@
 "use client";
-import { Book } from "@/app/models/books-model";
+import { Book, BookCategory } from "@/app/models/books-model";
+import {
+  TableContainer,
+  Paper,
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+} from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -19,8 +28,41 @@ const BooksTable = () => {
 
   return (
     <>
-      Books table
-      {books && <pre>{JSON.stringify(books, null, 2)}</pre>}
+      {books && (
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell>Lp.</TableCell>
+                <TableCell>Title</TableCell>
+                <TableCell>Author</TableCell>
+                <TableCell>Category</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {books.map((book, index) => (
+                <TableRow
+                  key={book.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    {index + 1}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {book.title}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {book.author}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    {BookCategory[book.category]}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      )}
     </>
   );
 };

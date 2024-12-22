@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import { useState } from "react";
 
 interface IKeyboardProps {
   handleLetterClick: (letter: string) => void;
@@ -20,8 +21,15 @@ const HangmanLetter = ({
   letter,
   index,
 }: IHangmanLetterProps) => {
+  const [wasPressed, setWasPressed] = useState<boolean>(false);
+
+  const handleClick = () => {
+    setWasPressed(true);
+    handleLetterClick(letter);
+  };
+
   return (
-    <Button onClick={() => handleLetterClick(letter)} key={index}>
+    <Button disabled={wasPressed} onClick={handleClick} key={index}>
       {letter}
     </Button>
   );
@@ -33,9 +41,12 @@ const Keyboard = ({ handleLetterClick }: IKeyboardProps) => {
   return (
     <>
       {letters.map((letter, index) => (
-        <Button onClick={() => handleLetterClick(letter)} key={index}>
-          {letter}
-        </Button>
+        <HangmanLetter
+          key={index}
+          handleLetterClick={handleLetterClick}
+          letter={letter}
+          index={index}
+        />
       ))}
     </>
   );

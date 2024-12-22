@@ -60,6 +60,11 @@ export const PageLayout = ({ children }: IProps) => {
                 <ListItemText primary={"Hangman"} />
               </ListItemButton>
             </Link>
+            <Link href={`/books`} passHref key={"books"}>
+              <ListItemButton>
+                <ListItemText primary={"Books"} />
+              </ListItemButton>
+            </Link>
           </List>
         </Box>
       </Drawer>

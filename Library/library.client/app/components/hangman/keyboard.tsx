@@ -26,6 +26,7 @@ const HangmanLetter = ({
   const handleClick = () => {
     setWasPressed(true);
     handleLetterClick(letter);
+    debugger;
   };
 
   return (

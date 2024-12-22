@@ -18,7 +18,7 @@ const BooksTable = () => {
 
   useEffect(() => {
     axios
-      .get<Book[]>("api/books")
+      .get<Book[]>("/api/books")
       .then((response) => {
         setBooks(response.data);
       })

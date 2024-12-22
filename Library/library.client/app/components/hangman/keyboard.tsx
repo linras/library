@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-interface IProps {
+interface IKeyboardProps {
   handleLetterClick: (letter: string) => void;
 }
 
@@ -10,7 +10,24 @@ interface IProps {
 // dostępne litery po kliknięciu na nie.
 // Podpowiedź: Litera powinna zostać nowym komponentem ze swoim stanem lokalnym.
 
-const Keyboard = ({ handleLetterClick }: IProps) => {
+interface IHangmanLetterProps extends IKeyboardProps {
+  letter: string;
+  index: number;
+}
+
+const HangmanLetter = ({
+  handleLetterClick,
+  letter,
+  index,
+}: IHangmanLetterProps) => {
+  return (
+    <Button onClick={() => handleLetterClick(letter)} key={index}>
+      {letter}
+    </Button>
+  );
+};
+
+const Keyboard = ({ handleLetterClick }: IKeyboardProps) => {
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   return (

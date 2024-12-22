@@ -1,8 +1,9 @@
 "use client";
 import { Book } from "@/app/models/books-model";
-import { Card, CardContent, CircularProgress } from "@mui/material";
+import { Button, Card, CardContent, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import EditBook from "../edit-book/edit-book";
 
 interface IProps {
   id: number;
@@ -27,12 +28,27 @@ const BookDetails = ({ id }: IProps) => {
       });
   }, [id]);
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/books/${id}`);
+      setBook({} as Book);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return book ? (
-    <Card>
-      <CardContent>
-        Book Details Page Book id: {<pre>{JSON.stringify(book, null, 2)}</pre>}
-      </CardContent>
-    </Card>
+    <>
+      <Button onClick={handleDelete}>Delete this book</Button>
+      <Card>
+        <CardContent>
+          Book Details Page Book id:{" "}
+          {<pre>{JSON.stringify(book, null, 2)}</pre>}
+          Custom env: {process.env.TEST_ENV_VAR}
+        </CardContent>
+      </Card>
+      <EditBook book={book} />
+    </>
   ) : loading ? (
     <CircularProgress />
   ) : (
